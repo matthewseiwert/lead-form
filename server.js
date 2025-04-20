@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const {createClient} = require('@supabase/supabase-js');
+
 
 const app = express();
 const post = process.env.PORT || 3000;
@@ -11,8 +13,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const supabase = createClient(
-    'https://ikoqgxssdxuhesdxdjcn.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrb3FneHNzZHh1aGVzZHhkamNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxNTAwNjgsImV4cCI6MjA2MDcyNjA2OH0.nTpKKocMy79Hz8TRcwb1qdGT09VAG0hpmsHkl2w0aaQ'
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
 );
 
 app.post('/submit', async (req, res) => {
